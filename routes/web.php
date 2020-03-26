@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/auth','GdeController@auth')->name('gde.auth');
 Route::get('/doc/{any}','GdeController@validateDocument')->where('any', '.*')->name('gde.validateDocument');
-// Route::get('doc/{numeroDocumeto}','GdeController@validateDocument')->name('gde.validateDocument');
+
+// catch all routes
+Route::fallback(function () {
+    return redirect('/');
+});

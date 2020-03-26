@@ -1,100 +1,56 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.master')
+@section('content')
+<style type="text/css">
+#qr {
+    width: 300px;
+    height: 225px;
+    border: 1px solid silver
+}
 
-        <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+</style>
+<div class="container-fluid text-center">
+                    <h1>Escanear Código QR</h1>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+                        <div class="form-group row block-center">
 
-            .full-height {
-                height: 100vh;
-            }
+                            <div class="col-4 "></div>
+                            <div class="col-4 ">
+                                
+                            <div id="qr" class="m-1" style="display: inline-block;">
+                                <span class="text-center text-muted">Click para escanear</span>
+                            </div>
+                            <select class="form-control center" id="cameraSelection"></select>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                            <div class="m-2">
+                                <button id="scanButton" class="btn btn-success btn-sm">Escanear QR</button>&nbsp;
+                                <button id="stopButton" class="btn btn-warning btn-sm" disabled="">Detener</button>
 
-            .position-ref {
-                position: relative;
-            }
+                                <span id="feedback" style="margin: 10px; display: inline-block"></span>
+                            </div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                            </div>
+                            <div class="col-4 "></div>
+                      </div>
 
-            .content {
-                text-align: center;
-            }
+                    <!-- <h3>O ingresar la URL</h3>
+                   <div class="row block-center">
+                   </div>
 
-            .title {
-                font-size: 84px;
-            }
+                    <form action="#" >
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+                        <div class="form-group row block-center">
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+                            <div class="col-4 "></div>
+                            <div class="col-4 ">
+                                <input type="url" class="form-control center" id="qr_url" placeholder="Url del documento">
+                            </div>
+                            <div class="col-4 "></div>
+                      </div>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+                    </form>-->
+    </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+@stop
+

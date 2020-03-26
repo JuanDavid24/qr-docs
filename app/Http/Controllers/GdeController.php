@@ -8,6 +8,8 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\ConnectException;
 
+use Config;
+
 use Illuminate\Http\Response;
 
 
@@ -15,8 +17,15 @@ class GdeController extends Controller
 {
 	protected $accessToken = false;
 	protected $refreshToken = false;
-	protected $securityUrl = 'http://msec.tst.gde.gob.ar/gde-security/security/auth';
+	protected $securityUrl;
+	protected $pdfApiUrl;
 
+
+	public function __construct() {
+		
+		$this->securityUrl = Config::get('gde.securityUrl');
+		$this->pdfApiUrl = Config::get('gde.pdfApiUrl'); 
+	}
     public function auth() {
 
     	$headers = [
@@ -24,10 +33,10 @@ class GdeController extends Controller
     		'Accept' => 'application/json'];
 
     	$query = [
-    		'application' => 'R0VET19BUFBMSUNBVElPTg==',
-    		'access_provider' => 'CASSimple',
-    		'username' => 'btusca',
-    		'password' => 'Gdetst.6',
+    		'application' => Config::get('gde.application'),
+    		'access_provider' => Config::get('gde.access_provider'),
+    		'username' => Config::get('gde.username'),
+    		'password' => Config::get('gde.password'),
 
     	];
         $client = new Client;
@@ -73,10 +82,9 @@ class GdeController extends Controller
     			->header('ContentType','application/pdf')
     			->header('Content-Disposition','attachment; filename="'.$filename.'"');
 
-    		return view('permisos.valido',['response' => $response]);
     	} else {
 
-    		return view('permisos.invalido',['response' => $response]);
+    		return view('permisos.invalido');
     	}
 
     }
@@ -89,7 +97,7 @@ class GdeController extends Controller
     	if(is_null($numeroDocumento)) {
     		$numeroDocumento = '';
     	}
-    	$url = 'http://eugapi.tst.gde.gob.ar/gde-restfull-api-web/api/v1/documento/' . urlencode($numeroDocumento) . '/pdf/qr?sistemaOrigen=TAD&codigoVerificador=';
+    	$url = $this->pdfApiUrl . urlencode($numeroDocumento) . '/pdf/qr?sistemaOrigen=TAD&codigoVerificador=';
     	//dd($url);
     	$headers = [
     		'Content-Type' => 'application/json',
