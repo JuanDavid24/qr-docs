@@ -10,12 +10,11 @@
 
 </style>
 <div class="container-fluid text-center">
-                    <h1>Escanear Código QR</h1>
+                    <h1>Comprobar documento</h1>
 
                         <div class="form-group row block-center">
 
-                            <div class="col-4 "></div>
-                            <div class="col-4 ">
+                            <div class="col-12 ">
                                 
                             <div id="qr" class="m-1" style="display: inline-block;">
                                 <span class="text-center text-muted">Click para escanear</span>
@@ -26,11 +25,10 @@
                                 <button id="scanButton" class="btn btn-success btn-sm">Escanear QR</button>&nbsp;
                                 <button id="stopButton" class="btn btn-warning btn-sm" disabled="">Detener</button>
 
-                                <span id="feedback" style="margin: 10px; display: inline-block"></span>
+                                <p><span id="feedback" style="margin: 10px; display: inline-block"></span></p>
                             </div>
 
                             </div>
-                            <div class="col-4 "></div>
                       </div>
 
                     <!-- <h3>O ingresar la URL</h3>
