@@ -22,8 +22,8 @@
                             <select class="form-control center" id="cameraSelection"></select>
 
                             <div class="m-2">
-                                <button id="scanButton" class="btn btn-success btn-sm">Escanear QR</button>&nbsp;
-                                <button id="stopButton" class="btn btn-warning btn-sm" disabled="">Detener</button>
+                                <button id="scanButton" class="btn btn-primary btn-sm">Escanear QR</button>&nbsp;
+                                <button id="stopButton" class="btn btn-secondary btn-sm" disabled="">Detener</button>
 
                                 <p><span id="feedback" style="margin: 10px; display: inline-block"></span></p>
                             </div>
