@@ -8,7 +8,7 @@
 
             <div class="text-center">
                 <div class="m-b-md center">
-                    <h1>Escanear Código QR</h1>
+                     <h1>Comprobar documento</h1>
                 </div>
 
                 <div class="title m-b-md">

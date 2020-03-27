@@ -33,23 +33,28 @@
 
     $(document).ready(function() {
 
-      $('#qr_url').change(function() {
-        console.log();
-        window.location.href = $(this).val();
+      $('#goButton').click(function(e) {
+        console.log($('#qr_url').val());
+        window.location.href = $('#qr_url').val();
 
 
     });
 
     var onQRCodeFoundCallback = function (qrCodeMessage) {
         // usar url
-        if(qrCodeMessage.includes('{{ $_SERVER['HTTP_HOST'] }}')) {
-            console.log(qrCodeMessage);
-            window.location.href = qrCodeMessage;
-        }
-        $("#feedback").html('<strong>' + qrCodeMessage + '</strong>');
+        $("#qr").html5_qrcode_stop();
+        $("#qr_url").val(qrCodeMessage);
+        $("#feedback").html("Datos encontrados");
+        $("#goButton").prop("disabled", false);
+        // if(qrCodeMessage.includes('{{ $_SERVER['HTTP_HOST'] }}')) {
+        //    console.log(qrCodeMessage);
+        //    window.location.href = qrCodeMessage;
+        // }
+
+
     }
     var onQRCodeNotFoundCallback = function (error) {
-        $("#feedback").html('Qr Inválido! Error: ' + error);
+        //$("#feedback").html('Qr Inválido! Error: ' + error);
     }
     var onVideoErrorCallback = function (videoError) {
         $("#feedback").html('Error en video : ' + videoError);
@@ -76,6 +81,8 @@
 
         $("#scanButton,#qr").on('click', function() {
             var cameraId = $("#cameraSelection").val();
+            $("#goButton").prop("disabled", true);
+            $("#feedback").html("Leyendo...");
             $("#cameraSelection").prop("disabled", true);
             $("#scanButton").prop("disabled", true);
             $("#stopButton").prop("disabled", false);
@@ -85,7 +92,7 @@
                 onQRCodeFoundCallback,
                 onQRCodeNotFoundCallback,
                 onVideoErrorCallback,
-                { fps : 10 }
+                { fps : 5 }
             );
         });
         $("#stopButton").on('click', function() {

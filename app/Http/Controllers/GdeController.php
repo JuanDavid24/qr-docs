@@ -65,7 +65,7 @@ class GdeController extends Controller
     }
 
     public function validateDocument($numeroDocumento_b64 = null) {
-
+    	set_time_limit(0);
 		\Log::info(__FUNCTION__);
 		\Log::info('Param: ' . $numeroDocumento_b64);
     	// parse param para quitar ultimo b64, pero manteniendo el primer b64 completo

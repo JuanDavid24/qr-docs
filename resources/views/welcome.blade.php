@@ -25,29 +25,22 @@
                                 <button id="scanButton" class="btn btn-primary btn-sm">Escanear QR</button>&nbsp;
                                 <button id="stopButton" class="btn btn-secondary btn-sm" disabled="">Detener</button>
 
-                                <p><span id="feedback" style="margin: 10px; display: inline-block"></span></p>
+                                <p><span id="feedback"></span></p>
+                                <br>
+                                    
+                                <form action="#" id="qr_form">
+                                <input type="text" class="form-control center" name="qr_url" id="qr_url">
+                                </form>
+                                <div>
+                                    
+                                <button role="button" id="goButton" class="btn m-1 btn-primary btn-sm" disabled="">Acceder</button>
+                                </div>
                             </div>
 
                             </div>
                       </div>
 
-                    <!-- <h3>O ingresar la URL</h3>
-                   <div class="row block-center">
-                   </div>
-
-                    <form action="#" >
-
-                        <div class="form-group row block-center">
-
-                            <div class="col-4 "></div>
-                            <div class="col-4 ">
-                                <input type="url" class="form-control center" id="qr_url" placeholder="Url del documento">
-                            </div>
-                            <div class="col-4 "></div>
-                      </div>
-
-
-                    </form>-->
+                    
     </div>
 
 @stop
