@@ -28,6 +28,8 @@ class GdeController extends Controller
 	}
     public function auth() {
 
+    	\Log::info(__FUNCTION__);
+
     	$headers = [
     		'Content-Type' => 'application/json',
     		'Accept' => 'application/json'];
@@ -43,6 +45,8 @@ class GdeController extends Controller
 
 		try {
 
+    		\Log::info('POST to ' . $this->securityUrl);
+
             $r = $client->request('POST',$this->securityUrl, ['headers'=>$headers, 'query' => $query]);
             $response = \GuzzleHttp\json_decode($r->getBody(), true);
 
@@ -52,6 +56,7 @@ class GdeController extends Controller
 
 		} catch (Exception | ServerException | ClientException $e) {
 			$message = $e->getResponse()->getBody()->getContents() ?? '';
+			\Log::info($message);
 			dump($message);
 			exit();
 		}      
@@ -61,6 +66,8 @@ class GdeController extends Controller
 
     public function validateDocument($numeroDocumento_b64 = null) {
 
+		\Log::info(__FUNCTION__);
+		\Log::info('Param: ' . $numeroDocumento_b64);
     	// parse param para quitar ultimo b64, pero manteniendo el primer b64 completo
     	// @todo: el parametro tiene que llegar con un urlencode!
     	$params = explode('/',$numeroDocumento_b64);
@@ -75,15 +82,19 @@ class GdeController extends Controller
     	$filename = trim($numeroDocumento) . '.pdf';
     	$this->auth();
 
+		\Log::info('Get: ' . $numeroDocumento);
     	$response = $this->getDocument($numeroDocumento);
+		//\Log::info(json_encode($response));
 
     	if($response['status'] ==200) {
+			\Log::info('Stream: ' . $filename);
     		return (new Response(base64_decode($response['content']),200))
     			->header('ContentType','application/pdf')
     			->header('Content-Disposition','attachment; filename="'.$filename.'"');
 
     	} else {
 
+			\Log::info('Doc invalido');
     		return view('permisos.invalido');
     	}
 
@@ -92,7 +103,8 @@ class GdeController extends Controller
     
 
     public function getDocument($numeroDocumento = null) {
-    	// http://eugapi.tst.gde.gob.ar/gde-restfull-api-web/api/v1/documento/IF-2019-23451299-APN-DNGDE%23JGM/pdf/qr?sistemaOrigen=TAD&codigoVerificador
+		
+		\Log::info(__FUNCTION__);
     	
     	if(is_null($numeroDocumento)) {
     		$numeroDocumento = '';
@@ -113,12 +125,15 @@ class GdeController extends Controller
 
         $client = new Client;
 
+		\Log::info('GET to ' . $url);
+		\Log::info(json_encode([$query, $headers]));
         try {
           $r = $client->request('GET',$url,['headers'=>$headers, 'query' => $query]); //,'debug' => true
           	
           	$status_code = $r->getStatusCode();
             $content = \GuzzleHttp\json_decode($r->getBody(), true);
             $message = 'OK';
+			
 
 		} catch (Exception | ServerException | ClientException $e) {
 
@@ -127,6 +142,7 @@ class GdeController extends Controller
 			$message = $e->getResponse()->getBody()->getContents() ?? '';
 		}
 		
+			\Log::info(json_encode([$status_code, $message]));
         	return [
         		'status'=>$status_code,
         		'message'=>$message,
