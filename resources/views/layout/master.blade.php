@@ -14,7 +14,7 @@
             <div>
                 <div class="navbar-header"> 
                     <a class="navbar-brand" href="/" aria-label="Trámites a Distancia - Presidencia de la Nación"> 
-                        <img src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/logo-tad.svg" alt="Argentina.gob.ar" height="50">
+                        <img src="{{ asset('/images/logoTAD-2020.png') }}" alt="Argentina.gob.ar" height="50">
                     </a>
                     
                 </div>
