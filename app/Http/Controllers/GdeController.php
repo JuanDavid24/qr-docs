@@ -54,10 +54,10 @@ class GdeController extends Controller
             $this->accessToken = $response['accessToken'];
             $this->refreshToken = $response['refreshToken'];
 
-		} catch (Exception | ServerException | ClientException $e) {
-			$message = $e->getResponse()->getBody()->getContents() ?? '';
+		} catch (Exception | ServerException | ClientException | ConnectException $e) {
+			$message = __FUNCTION__;
 			\Log::info($message);
-			dump($message);
+			return view('permisos.invalido');
 			exit();
 		}      
 
@@ -139,11 +139,11 @@ class GdeController extends Controller
             $message = 'OK';
 			
 
-		} catch (Exception | ServerException | ClientException $e) {
+		} catch (Exception | ServerException | ClientException | ConnectException  $e) {
 
 			$status_code = $e->getCode();
             $content = '';
-			$message = $e->getResponse()->getBody()->getContents() ?? '';
+			$message = __FUNCTION__;
 		}
 		
 			\Log::info(json_encode([$status_code, $message]));

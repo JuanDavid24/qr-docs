@@ -12,8 +12,8 @@
                 </div>
 
                 <div class="title m-b-md">
-                	<div class="alert alert-danger" role="alert">
-					  Documento inexistente
+                	<div class="alert alert-warning" role="alert">
+					  No se puede validar. Vuelva a intentar
 					</div>
 					<a href="/">
                     <button class="btn btn-primary">Volver</button>
