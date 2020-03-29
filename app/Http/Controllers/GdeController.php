@@ -89,7 +89,8 @@ class GdeController extends Controller
     	if($response['status'] ==200) {
             $response['filename'] = $filename;
 			\Log::info('Stream: ' . $filename);
-            return view('permisos.valido',['response'=>$response]);
+            return view('permisos.viewer',['response'=>$response]);
+            // return view('permisos.valido',['response'=>$response]);
             /*
     		return (new Response(base64_decode($response['content']),200))
     			->header('ContentType','application/pdf')

@@ -10,10 +10,7 @@
                 </a>
               </div>
             <embed src="data:application/pdf;base64,{!! $response['content'] !!}" width="100%" height="800px" type="application/pdf">
-              <noembed>
-              <h1>No tiene el plufin para ver este documento</h1>
-            </noembed>
-          </embed>
+              
 
         </div>
 
