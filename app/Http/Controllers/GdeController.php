@@ -87,11 +87,14 @@ class GdeController extends Controller
 		//\Log::info(json_encode($response));
 
     	if($response['status'] ==200) {
+            $response['filename'] = $filename;
 			\Log::info('Stream: ' . $filename);
+            return view('permisos.valido',['response'=>$response]);
+            /*
     		return (new Response(base64_decode($response['content']),200))
     			->header('ContentType','application/pdf')
     			->header('Content-Disposition','attachment; filename="'.$filename.'"');
-
+            */
     	} else {
 
 			\Log::info('Doc invalido');
@@ -119,7 +122,7 @@ class GdeController extends Controller
     	];
 
     	$query = [
-    		'sistemaOrigen' => 'TAD',
+    		'sistemaOrigen' => Config::get('gde.sistemaOrigen'),
     		'codigoVerificador' => ''
     	];
 

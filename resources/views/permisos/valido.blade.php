@@ -1,30 +1,20 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layout.master')
+@section('content')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="flex-center position-ref full-height">
 
-    <title>Argentina.gob.ar</title>
-  </head>
-  <body>
-    <h1>Documento válido</h1>
 
-    <object data="#" type="application/pdf" width="100%" height="800px"> 
-  <p>It appears you don't have a PDF plugin for this browser.
-   No biggie... you can <a href="resume.pdf">click here to
-  download the PDF file.</a></p>  
-</object>
+            <div class="text-center m-1">
+          <a href="/">
+                    <button class="btn btn-primary">Volver</button>
+                </a>
+              </div>
+            <embed src="data:application/pdf;base64,{!! $response['content'] !!}" width="100%" height="800px" type="application/pdf">
+              <noembed>
+              <h1>No tiene el plufin para ver este documento</h1>
+            </noembed>
+          </embed>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+        </div>
 
-{{ dd($response) }}
+@stop

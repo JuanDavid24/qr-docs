@@ -9,6 +9,7 @@ return [
     'username' => env('GDE_USERNAME', 'TAD_QR'),
     'password' => env('GDE_PASSWORD', 'Generico1'),
     'pdfApiUrl' => env('GDE_PDFAPIURL', 'http://eugapi.tst.gde.gob.ar/gde-restfull-api-web/api/v1/documento/'),
+    'sistemaOrigen' => env('GDE_SISTEMAORIGEN', 'TAD_QR'),
    
 
 ];

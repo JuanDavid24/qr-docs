@@ -34,7 +34,6 @@
     $(document).ready(function() {
 
       $('#goButton').click(function(e) {
-        console.log($('#qr_url').val());
         window.location.href = $('#qr_url').val();
 
 
@@ -46,11 +45,9 @@
         $("#qr_url").val(qrCodeMessage);
         $("#feedback").html("Datos encontrados");
         $("#goButton").prop("disabled", false);
-        // if(qrCodeMessage.includes('{{ $_SERVER['HTTP_HOST'] }}')) {
-        //    console.log(qrCodeMessage);
-        //    window.location.href = qrCodeMessage;
-        // }
-
+        if(qrCodeMessage.includes('{{ $_SERVER['HTTP_HOST'] }}')) {
+            window.location.href = qrCodeMessage;
+        }
 
     }
     var onQRCodeNotFoundCallback = function (error) {
@@ -74,9 +71,7 @@
         }
         $("#cameraSelection").prop("disabled", false);
         $("#cameraSelection").on("change", function () {
-            console.log("Option changed");
-            console.log($("#cameraSelection").val());
-        })
+        });
         $("#scanButton").prop("disabled", false);
 
         $("#scanButton,#qr").on('click', function() {
