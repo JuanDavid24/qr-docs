@@ -12,9 +12,9 @@
                 </div>
 
                 <div class="title m-b-md">
-                	<div class="alert alert-danger" role="alert">
+                	<!-- <div class="alert alert-danger" role="alert">
 					  Documento inexistente
-					</div>
+					</div> -->
 					<a href="/">
                     <button class="btn btn-primary">Volver</button>
                 </a>
