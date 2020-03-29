@@ -8,7 +8,7 @@
 
             <div class="text-center">
                 <div class="m-b-md center">
-                     <h1>Comprobar documento</h1>
+                     <h3>Comprobar documento</h3>
                 </div>
 
                 <div class="title m-b-md">

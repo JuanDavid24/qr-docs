@@ -59,10 +59,7 @@
         $("#qr_url").val(qrCodeMessage);
         $("#feedback").html("Datos encontrados");
         $("#goButton").prop("disabled", false);
-        if(qrCodeMessage.includes('{{ $_SERVER['HTTP_HOST'] }}')) {
-            window.location.href = qrCodeMessage;
-        }
-
+        
     }
     var onQRCodeNotFoundCallback = function (error) {
         //$("#feedback").html('Qr Inválido! Error: ' + error);
