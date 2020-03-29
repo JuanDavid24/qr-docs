@@ -29,9 +29,7 @@
 
         thePDF = pdf;
         numPages = pdf.numPages;
-        pdf.getPage( 1 ).then( handlePages );
-
-    pdf.getPage(1).then( handlePages );
+        pdf.getPage(1).then( handlePages );
 
     function handlePages(page) {
       var scale = 1.5;

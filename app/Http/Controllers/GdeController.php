@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 
 use Config;
 
@@ -54,7 +55,7 @@ class GdeController extends Controller
             $this->accessToken = $response['accessToken'];
             $this->refreshToken = $response['refreshToken'];
 
-		} catch (Exception | ServerException | ClientException | ConnectException $e) {
+		} catch (Exception | ServerException | ClientException | ConnectException | RequestException $e) {
 			$message = __FUNCTION__;
 			\Log::info($message);
 			return view('permisos.invalido');
@@ -139,7 +140,7 @@ class GdeController extends Controller
             $message = 'OK';
 			
 
-		} catch (Exception | ServerException | ClientException | ConnectException  $e) {
+		} catch (Exception | ServerException | ClientException | ConnectException | RequestException  $e) {
 
 			$status_code = $e->getCode();
             $content = '';
