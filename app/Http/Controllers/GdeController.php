@@ -113,7 +113,7 @@ class GdeController extends Controller
     	if(is_null($numeroDocumento)) {
     		$numeroDocumento = '';
     	}
-    	$url = $this->pdfApiUrl . urlencode($numeroDocumento) . '/pdf/qr?sistemaOrigen=TAD&codigoVerificador=';
+    	$url = $this->pdfApiUrl . urlencode($numeroDocumento) . '/pdf/qr?sistemaOrigen=TAD_QR&codigoVerificador=';
     	//dd($url);
     	$headers = [
     		'Content-Type' => 'application/json',
@@ -123,7 +123,7 @@ class GdeController extends Controller
     	];
 
     	$query = [
-    		'sistemaOrigen' => Config::get('gde.sistemaOrigen'),
+    		'sistemaOrigen' => 'TAD_QR',
     		'codigoVerificador' => ''
     	];
 
