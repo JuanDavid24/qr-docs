@@ -1,0 +1,145 @@
+//miga de pan
+.breadcrumb li{ font-size: $font-peque}
+
+//Buscador general
+.buscamos{
+    input.tt-input{padding: 19px; font-size: 20px}
+    .btn{margin-bottom: 0px;}
+}
+
+//btn tramite nuevo
+.cont-nuevot{ display: block;overflow: hidden; width: 100%; clear: both; position: relative;
+        @media (min-width: 425px){h2{ float: left;}}
+        .nuevo-tramite{ width: 100%;
+            @media (min-width: 425px){ width: auto; font-size: 12px; float: right; margin-top: 20px}
+        }
+        .volver-btn{ width: 100%; font-size: 11px; 
+            @media (min-width: 425px){ width: auto; float: right; margin-top: 20px;}
+        }
+        .breadcrumb{ width:100%;
+            @media (min-width: 425px){ width:74%; float: left;}
+        }
+    }
+
+//busqueda de tramites
+.ico-pago{ img{ width: 20px}}
+.resultados{ padding: 0;
+        .pago{ float: right;
+            img{ width: 25px}
+        }
+        p{ color: $color-griso; margin: 0; width: auto}
+        small{ color: $color-griso}
+    
+}
+.res-trami{ padding: 0;
+    ///botones de nuevo trámite
+    .los-botones{ padding-top:20px;
+        .btn{ width: 100%}
+       @media (min-width: 320px){ text-align: right; padding-top:20px;
+        .btn{ width: auto}}
+   }
+}
+//cantidad
+.filtros{ padding: 0;
+          @media (min-width: 992px){ padding: 15px 20px 15px 0;}}
+.nav-stacked{
+    li{    font-size: 14px;
+         @media (min-width: 425px){font-size: 16px}
+         a {padding: 10px 15px 10px 5px; font-size: 14px}
+    }
+.b-nav-cir{ background: $color-griso; margin-top: -3px;
+
+}}
+//ver todos
+.btn-ver-todos{ margin-top: 10px; border-top: 1px solid $color-grisc; padding-top: 10px;
+    .ver-todos{border: 1px solid $color-azulo; width: 100%; float: right;
+                &:hover{border: 1px solid $color-azulo; }
+                &:visited{ color: $color-azulo}
+                @media (min-width: 425px) {width: 30%;}
+            }
+}
+
+
+
+//comenzamos un tramiteee
+.datos-tramite{ overflow: hidden;
+    .organismo-tramite{ float: left; color: $color-griso; margin-bottom: 0;} 
+    .ver-tramite{ float: right; }
+    .info-rele{display: block; clear: both; padding: 5px; border-radius: 5px; font-size: $font-peque;
+    border: 1px solid $color-naranja;
+        span{color: $color-naranja; font-weight: bold;}}
+}
+.progreso-tram{margin-top: 20px;
+        .completo{ overflow: hidden; 
+            .txt-completo{ float: left; width: 40%; font-size: 20px; padding-top: 8px}
+            .cantidad{ float: right; width: 40%; text-align: right;font-size: 30px;}
+
+
+                }
+}
+.aclaraciones{ overflow: hidden; margin-bottom: 10px;
+    p{ font-size: 14px;}
+    span{ color: red}
+    .aclara-aclara{ font-size: 11px; color: $color-griso;
+    .cuenta{ width: 100%; float: left;
+         @media (min-width: 425px){ width: 49% }
+    }
+    .obliga{width: 100%;
+   @media (min-width: 425px){ width: 49%; text-align: right; float: right;}
+        } }
+}
+.ad-doc{ font-size: $font-peque;
+    }
+
+
+
+
+//hablamos de documentacion
+.doc-subir{ margin: 38px 0; overflow: hidden;  padding-bottom: 10px; font-size: $font-media;
+        .mod-adjunta{overflow: hidden; border-bottom: 1px $color-grisc dashed;padding: 10px 0;
+            .archivos{ padding-right: 0; padding-left: 0}
+            .obliga{padding-right: 0; padding-left: 0; float: left; width: 18px}
+                   }
+                   .accion-doc{ text-align: right;}
+            .docs-cargar{padding-right: 0; padding-left: 0; float: left; width: 90%;
+                        ul{ margin: 0; padding: 0; list-style: none; }
+                        .refiere-doc{font-weight: bold;}
+                }
+            }
+.documentacion-subir{
+    .drop{overflow: hidden;}
+    .modal-footer { clear: both;}
+    .drop-file{ font-size: $font-peque;
+       }
+}
+ @media (max-width: 580px){.col-btn-modal{ width: 100% !important}}
+
+ .caratula-variable{ clear: both;
+    h3{ background: $color-grisc}
+    .form-group{margin-bottom: 3px }
+    .col-xs-6{ padding-right: 0; padding-left: 0; margin-top: 3px}
+ }
+
+//finalizamos el trámite
+.texto-correcto{ text-align: center; color: $color-verde}
+.finaliza-exp{ padding-top: 10px}
+.help-block{ font-size: 10px}
+.descargar-todo{ text-align: right;}
+
+//ingreso extranjeros
+.contenedor-extranjeros{
+.ingreso-extranjeros{
+  
+    margin: 20px 0;
+    padding: 39px 14px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+.centrar {text-align: center; } 
+.btn {margin-top:20px;}
+.incorrecto{margin-bottom:10px;}
+.titulo-extranjero{color: $color-azulo;}
+}}
+

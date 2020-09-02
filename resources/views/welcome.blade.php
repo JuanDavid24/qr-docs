@@ -1,45 +1,45 @@
 @extends('layout.master')
 @section('content')
-<style type="text/css">
-#qr {
-    width: 300px;
-    height: 225px;
-    border: 1px solid silver
-}
 
-</style>
-<div class="container-fluid text-center">
-    <h3>Comprobar documento</h3>
+<div class="container-fluid">
+    <h3>Consultar documento oficial</h3>
+    <p>Obtené información de un documento oficial escaneando su código QR</p>
+    <p><strong>Escáner de código QR</strong></p>
 
-        <div class="form-group row block-center">
-
-            <div class="col-12 ">
+    <div class="form-group block-center">   
+        <div class="col-12 ">    
+            <div id="qr-block">
+                <div id="qr" class="m-1">
+                    <span class="text-center text-muted">Click para escanear</span>
+                </div><br>
                 
-            <div id="qr" class="m-1" style="display: inline-block;">
-                <span class="text-center text-muted">Click para escanear</span>
+                <button id="scanButton" class="btn btn-primary btn-sm">Escanear código QR</button>                     
+                <span class="buttonGroup" id="buttonGroupScanning">
+                    <button id="stopButton" class="btn btn-secondary btn-sm">Detener</button>
+                    <button id="switchButton" class="btn btn-secondary btn-sm">Cambiar cámara</button>
+                </span> 
+                <!--resultado qr/!-->      
+                <p><span id="feedback"></span></p> 
             </div>
-            <select class="form-control center" id="cameraSelection"></select>
 
-            <div class="m-2">
-                <button id="scanButton" class="btn btn-primary btn-sm">Escanear QR</button>&nbsp;
-                <button id="stopButton" class="btn btn-secondary btn-sm" disabled="">Detener</button>
-
-                <p><span id="feedback"></span></p>
-                <br>
-                    
+            <div class="m-2">                
+            <div>      
                 <form action="#" id="qr_form">
-                <input type="text" class="form-control center" name="qr_url" id="qr_url">
-                </form>
-                <div>
-                    
-                <button role="button" id="goButton" class="btn m-1 btn-primary btn-sm" disabled="">Acceder</button>
-                </div>
+                    <input type="text" class="form-control center disabled" name="qr_url" id="qr_url">
+                </form>    
+                <button role="button" id="goButton" class="btn m-1 btn-primary btn-sm" disabled="">Acceder</button>  
             </div>
+        </div>
+        </div>
+      </div>
 
-            </div>
+      <div class="form-group block-center" id="verification_block">
+          <p><strong>Ingresar código de verificación</strong></p>
+          <span>Para descargar el documento, ingresar el código de verificación de 7 dígitos que se encuentra debajo del código QR</span>
+          <input type="textarea" class="form-control center" name="verif_code" id="verif_code">
+          <span id= verif_feedback></span>          
       </div>
     </div>
-
 @stop
 @section('js')
     <script src="{{ asset('js/jsqrcode-combined.js') }}"></script>
@@ -67,47 +67,67 @@
     var onVideoErrorCallback = function (videoError) {
         $("#feedback").html('Error en video : ' + videoError);
     }
-    var onCamerasEnumerated = function (cameras) {
+
+    //iterar array de camaras
+    var currentCameraIndex;
+    var loopCameraIndex = function (cameras, currentCameraIndex) {    
+        if (currentCameraIndex == cameras.length-1){  //llego al final del array
+            currentCameraIndex = 0;          
+        } else{
+            currentCameraIndex = currentCameraIndex + 1; 
+        }   
+        return(currentCameraIndex);
+    }
+
+    var onCamerasEnumerated = function (cameras, currentCameraIndex) {
         // Cameras found.
         $("#logging").html("Cámaras: " +cameras.length);
         if (cameras.length == 0) {
             $("#feedback").html("Error: No hay cámaras habilitadas");
             return;
         }
-        for (i = 0; i < cameras.length; i++) {
-            var camera = cameras[i];
-            var value = camera.id;
-            var name = camera.label == null ? value : camera.label;
-            $("#cameraSelection").append("<option value='" + value+ "'>" + name + "</option>");
-        }
-        $("#cameraSelection").prop("disabled", false);
-        $("#cameraSelection").on("change", function () {
-        });
-        $("#scanButton").prop("disabled", false);
-
+        $("#scanButton").prop("disabled", false);      
         $("#scanButton,#qr").on('click', function() {
-            var cameraId = $("#cameraSelection").val();
-            $("#goButton").prop("disabled", true);
+            var cameraId = cameras[0].id;
+            currentCameraIndex = 0;
             $("#feedback").html("Leyendo...");
-            $("#cameraSelection").prop("disabled", true);
-            $("#scanButton").prop("disabled", true);
-            $("#stopButton").prop("disabled", false);
+            $("#scanButton").hide();
+            $("#stopButton").show();
+            $("#switchButton").show();
+            $("#buttonGroupScanning").show();
             $("#status").html('scanning');
-            $('#qr').html5_qrcode(
+            set_camera(cameraId, onQRCodeFoundCallback, onQRCodeNotFoundCallback, onVideoErrorCallback);
+            /*$('#qr').html5_qrcode(
                 cameraId,
                 onQRCodeFoundCallback,
                 onQRCodeNotFoundCallback,
                 onVideoErrorCallback,
                 { fps : 5 }
-            );
+            );*/
         });
         $("#stopButton").on('click', function() {
             $("#qr").html5_qrcode_stop();
-            $("#cameraSelection").prop("disabled", false);
-            $("#scanButton").prop("disabled", false);
-            $("#stopButton").prop("disabled", true);
+            $("#scanButton").show();
+            $("#stopButton").hide();
+            $("#switchButton").hide();
             $("#feedback").html("");
+            $('#cameraIndex').append(currentCameraIndex);           
         });
+        $('#switchButton').on('click', function() {
+            currentCameraIndex = loopCameraIndex(cameras, currentCameraIndex);
+            cameraId = cameras [currentCameraIndex].id;
+            $('#cameraIndex').append(currentCameraIndex);            
+            set_camera(cameraId, onQRCodeFoundCallback, onQRCodeNotFoundCallback, onVideoErrorCallback);
+        });
+    }
+    var set_camera = function (cameraId, onQRCodeFoundCallback, onQRCodeNotFoundCallback, onVideoErrorCallback){
+        $('#qr').html5_qrcode(
+                cameraId,
+                onQRCodeFoundCallback,
+                onQRCodeNotFoundCallback,
+                onVideoErrorCallback,
+                { fps : 5 }
+                );
     }
     var onCameraEnumerationFailed = function (errorMessage) {
         $("#feedback").html("Error: no hay cámaras: " +errorMessage);

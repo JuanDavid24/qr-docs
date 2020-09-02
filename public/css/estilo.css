@@ -1,0 +1,101 @@
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header{
+   /* We want the header to have a static height,
+   it will always take up just as much space as it needs.  */
+   /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+   flex: 0 0 auto;
+}
+
+.main-content{
+   /* By setting flex-grow to 1, the main content will take up
+   all of the remaining space on the page.
+   The other elements have flex-grow: 0 and won't contest the free space. */
+   /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+   flex: 1 0 auto;
+}
+
+footer{
+   /* Like the header, the footer will have a static height - it shouldn't grow or shrink.  */
+   /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+   flex: 0 0 auto;
+}
+
+.video-title{
+  font-family:Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.video-list{
+    width: 35rem;
+    height: 20rem;
+    border-radius: 2px;
+}
+
+.video-list:not(:first-child){
+    margin-top: 1.6rem;
+}
+
+.video-list:hover{
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .4);
+  border-radius: 2px;
+  display: inline-block;
+  text-align: center;
+}
+
+
+@media screen and (max-width: 500px) {
+    .video-list {
+      width: 20rem;
+      height: 12rem;
+    }
+}
+
+.name-box{
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: .2rem;
+  border-radius: 3px;
+}
+
+/* ----master.blade----*/
+#footer-logo-mobi{
+  margin-left: 28px;
+}
+
+/* ----welcome.blade----*/
+#qr {
+  width: 300px;
+  height: 225px;
+  border: 3px solid silver;
+  text-align: center;
+  display: inline-block;
+}
+#qr-block{
+  align-self: center;
+  align-content: center;
+}
+#verif_code{
+  width: 200px;
+}
+#scanButton{
+  width: 300px;
+}
+.buttonGroup {
+  display: none;
+}
+.buttonGroup .btn{
+  min-width: 150px !important;
+  max-width: 150px;    
+}
+@media only screen and (max-width: 600px) {
+#qr-block {
+  margin-left: 20px;
+}
+}

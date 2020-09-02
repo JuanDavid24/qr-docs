@@ -1,0 +1,99 @@
+//llamemos a todos
+@import 'helpers/variables';
+@import 'helpers/header-footer';
+@import 'helpers/tablas';
+@import 'helpers/nuevos';
+
+ 
+body{background: #fff}
+a { color: $color-azulo;}
+a:active, a:active * { outline: none !important; -moz-outline-style: none !important; }
+a:focus, a:focus * { outline: none !important; -moz-outline-style: none !important; }
+
+h2{ font-size: 2em;}
+h3{ font-size: 1.5em; 
+	span{ color: $color-azulc;}
+}
+h4{ font-size: 1.2em;
+	&.tit-azul{ color: $color-azulo;}}
+hr{    margin: 15px 0;}
+
+.rojo{ color: red} 
+.naranja{ color: $color-naranja}
+.verde{ color: $color-verde}
+//buscamos
+.buscamos{
+    input.tt-input{padding: 19px; font-size: 20px}
+    .btn{margin-bottom: 0px;}
+}
+
+.jumbotron .jumbotron_body {
+	@media (max-width:550px){ min-height: 200px;}
+    min-height: 300px;}
+//navegacion de botones
+.ingresos-btn{    text-shadow: none; margin-bottom: 0;
+	 @media (max-width:425px){ text-align: center;  }
+	 li:first-child:after {content: ' ' !important;
+	 }
+	 .agranda{
+	 @media (max-width:425px){    float: none;    margin-bottom: 0 !important;    padding-bottom: 0 !important;    width: 100%;  line-height: 0px;  text-align: center; font-size: $font-peque; i{ display: none}}
+	 }
+
+	.ingresar{ color: #333; }
+	ingresar2{ color: #333}
+	.btn{margin-bottom: 0 !important;
+	@media (max-width:425px){ margin-bottom: 2px !important;  } }
+		
+	}
+//items menu
+.items-menu{ text-align: center;
+		 h3{}
+                p{ color: #333}
+		 }
+
+//formularios
+.form-horizontal{ margin-bottom: 10px}
+.form-group{ font-size: 13px;    margin-bottom: 0px;
+	label{ margin-top: 5px;}
+	&.agrupa{
+		@media (max-width:550px){
+			div, label{ width: 100% !important; float: none;}
+		}
+		@media (min-width:551px){
+			div, label{ margin-top: 5px}
+		}
+		span{ color: $color-verde; right: 15px;}
+	}
+	&.btn-ver-mas{ text-align: right; margin: 15px 0 0 0;
+			a{ line-height: 2.4; margin-right: 5px}}
+	input, select, textarea{
+		@media (min-width:768px){font-size: 13px}
+	}
+	.col-sm-10{ &.form-tel{ 	
+		padding-left: 0; padding-right: 0;
+			.form-control{margin-bottom: 7px;}
+				@media (min-width:768px){
+					padding-right: 8px; padding-left: 12px;
+
+					.col-xs-2, .col-xs-8{ padding:0 5px 0 0 }
+										input{ padding:6px 1px}}
+				@media (min-width:992px){
+					padding-right: 12px;
+					.col-xs-2, .col-xs-8{ padding:0 3px}
+										}
+}}
+	&.oculto{color:red; 
+		input{color: red}
+	
+
+	}
+	
+	.form-control { height: auto;}
+	.quemado{ background-color: transparent;  border: none; box-shadow: none; padding: 0;
+		@media (min-width:768px){padding: 10px 0 0 0;}
+	}
+	.editar-continuar{ text-align: center; margin-top: -5px; margin-bottom:10px; 
+		.btn{ margin:  10px 10px auto 10px;}
+		.btn-sm{ margin-top: 20px}
+		}
+}
