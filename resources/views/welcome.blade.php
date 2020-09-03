@@ -97,13 +97,6 @@
             $("#buttonGroupScanning").show();
             $("#status").html('scanning');
             set_camera(cameraId, onQRCodeFoundCallback, onQRCodeNotFoundCallback, onVideoErrorCallback);
-            /*$('#qr').html5_qrcode(
-                cameraId,
-                onQRCodeFoundCallback,
-                onQRCodeNotFoundCallback,
-                onVideoErrorCallback,
-                { fps : 5 }
-            );*/
         });
         $("#stopButton").on('click', function() {
             $("#qr").html5_qrcode_stop();
