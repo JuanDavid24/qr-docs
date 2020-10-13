@@ -1,34 +1,59 @@
 @extends('layout.master')
 @section('content')
 
-<div class="container-fluid d-flex flex-column">
 
-@if($response["code"] == 500)
-
-<section class="col-md-12 center" id="buscador">
+@if( $response['status'] == 401)
+    <section class="col-md-8 col-md-offset-2 center text-center">
+       <section class="col-md-8 col-md-offset-2" id="titulo">
         
-        <h6><span class="glyphicon glyphicon-ok text-success"></span></h6>
-        <center>
-            
-        <a href="/">
+        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
+        <p>Obtené información de un documento oficial por su número o código QR</p>
+    </section>
+
+
+        <p>
+          <span style="font-size: 60px;" class="glyphicon glyphicon-remove text-danger"></span>
+        </p>
+        <h6>El código de verificación indicado es incorrecto</h6>
+
+            <button role="button" class="btn btn-sm btn-primary" onclick="window.history.back()">
+            <span class="glyphicon glyphicon-backward"></span>
+            Volver
+          </button>
+          
+          <a href="/">
             <button role="button" class="btn btn-sm btn-primary">
             <span class="glyphicon glyphicon-refresh"></span>
             Consultar otro documento</button>
-        </a>              
-        </center>
+        </a>
+        
     </section>
 
-@endif
-    <section class="col-md-12 center" id="buscador">
+@else
+<div class="container-fluid d-flex flex-column">
+   <section class="col-md-8 col-md-offset-2" id="titulo">
+        
+        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
+        <p>Obtené información de un documento oficial por su número o código QR</p>
+    </section>
+
+    <section class="col-md-12 text-center" id="buscador">
         
         <h6>{!! $response["numeroDocumento"] !!} <span class="glyphicon glyphicon-ok text-success"></span></h6>
         <center>
             
+
         <a href="/">
             <button role="button" class="btn btn-sm btn-primary">
             <span class="glyphicon glyphicon-refresh"></span>
             Consultar otro documento</button>
-        </a>              
+        </a> 
+
+        <a href="#" id="descargar">
+            <button role="button" class="btn btn-sm btn-primary" onclick="downloadPDF()">
+            <span class="glyphicon glyphicon-download"></span>
+            Descargar</button>
+        </a>
         </center>
     </section>
 
@@ -41,7 +66,19 @@
 
 <script src="{{ asset('/js/pdfjs/build/pdf.js') }}"></script>
 
+
 <script id="script">
+
+  /**
+ * Creates an anchor element `<a></a>` with
+ * the base64 pdf source and a filename with the
+ * HTML5 `download` attribute then clicks on it.
+ * @param  {string} pdf 
+ * @return {void}     
+ */
+
+
+
   var pdfData = atob('{!! $response["content"] !!}');
   pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset("/js/pdfjs/build/pdf.worker.js") }}';
   var loadingTask = pdfjsLib.getDocument({ data: pdfData, });
@@ -80,8 +117,22 @@
       }
     }
   });
+
+
+  function downloadPDF() {
+    const linkSource = 'data:application/pdf;base64,'+btoa(pdfData);
+    const downloadLink = document.createElement("a");
+    const fileName = "{!! $response["numeroDocumento"] !!}.pdf";
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+}
+
+
 </script>  
 </center>
+@endif
 
 
 

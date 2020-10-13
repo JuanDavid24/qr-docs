@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::get('/doc/{any}','GdeController@validateDocument')->where('any', '.*')->name('gde.validateDocument');
+// Route::get('/doc/{any}','GdeController@validateDocument')->where('any', '.*')->name('gde.validateDocument');
+Route::get('/doc/{any}','FrontController@index')->where('any', '.*')->name('index');
+Route::get('/','FrontController@index')->name('index');
+Route::post('/consulta','FrontController@consulta')->name('consulta');
+Route::post('/consulta/pdf','FrontController@verPdf')->name('verPdf');
 
 // catch all routes
 Route::fallback(function () {
