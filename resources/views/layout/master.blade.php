@@ -52,9 +52,9 @@
   </nav>
 </header>
 <div class="container-fluid d-flex flex-column">
-<section class="col-md-10 col-md-offset-2" id="titulo">
+<section class="col-md-8 col-md-offset-2" id="titulo">
         
-        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
+        <h3 >Consultar documento oficial</h3>
         <p>Obtené información de un documento oficial por su número o código QR</p>
     </section>
 
