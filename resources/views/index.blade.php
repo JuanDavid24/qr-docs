@@ -2,7 +2,7 @@
 @section('content')
 
 
-<section class="col-md-8 col-md-offset-2 text-center" id="titulo" style="margin-top: 0px; padding-top: 0px">
+<section class="col-md-8 col-md-offset-2 text-center" style="margin-top: 0px; padding-top: 0px">
     <span class="text-muted">Ingrese el número de documento</span>
 </section>
 <section class="col-md-8 col-md-offset-2" id="buscador2" style="margin-top: 0px; padding-top: 0px;">
