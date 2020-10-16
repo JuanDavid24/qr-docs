@@ -104,21 +104,21 @@
 
 
         <a href="#">
-        <button type="button" role="button" class="btn btn-sm btn-secondary" onclick="javascript:window.history.back();return false;">
+        <button type="button" role="button" class="btn btn-md btn-secondary" onclick="javascript:window.history.back();return false;">
             <span class="glyphicon glyphicon-backward"></span>
             Volver</button>
           </a>
 
         <a href="/">
-            <button type="button" role="link" class="btn btn-sm btn-secondary">
+            <button type="button" role="link" class="btn btn-md btn-secondary">
             <span class="glyphicon glyphicon-refresh"></span>
-            Consultar otro</button>
+            Consultar otros</button>
         </a>
 @if( $gedo['qr'])
 <form action="{{ route('verPdf') }}" method="POST">
             @csrf
             <input type="hidden" name="nroDocumento" value="{{ $detalle['content']['numeroGde'] ?? '' }}">
-            <button type="submit" role="button" class="btn btn-sm btn-primary" >
+            <button type="submit" role="button" class="btn btn-md btn-primary" >
             <span class="glyphicon glyphicon-eye-open"></span>
             Visualizar documento</button>
 

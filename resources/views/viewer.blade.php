@@ -16,13 +16,13 @@
         </p>
         <h6>El código de verificación indicado es incorrecto</h6>
 
-            <button role="button" class="btn btn-sm btn-primary" onclick="window.history.back()">
+            <button role="button" class="btn btn-md btn-primary" onclick="window.history.back()">
             <span class="glyphicon glyphicon-backward"></span>
             Volver
           </button>
           
           <a href="/">
-            <button role="button" class="btn btn-sm btn-primary">
+            <button role="button" class="btn btn-md btn-primary">
             <span class="glyphicon glyphicon-refresh"></span>
             Consultar otro documento</button>
         </a>
@@ -30,13 +30,7 @@
     </section>
 
 @else
-<div class="container-fluid d-flex flex-column">
-   <section class="col-md-8 col-md-offset-2" id="titulo">
-        
-        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
-        <p>Obtené información de un documento oficial por su número o código QR</p>
-    </section>
-
+  
     <section class="col-md-12 text-center" id="buscador">
         
         <h6>{!! $response["numeroDocumento"] !!} <span class="glyphicon glyphicon-ok text-success"></span></h6>
@@ -44,20 +38,19 @@
             
 
         <a href="/">
-            <button role="button" class="btn btn-sm btn-primary">
+            <button role="button" class="btn btn-md btn-primary">
             <span class="glyphicon glyphicon-refresh"></span>
             Consultar otro documento</button>
         </a> 
 
         <a href="#" id="descargar">
-            <button role="button" class="btn btn-sm btn-primary" onclick="downloadPDF()">
+            <button role="button" class="btn btn-md btn-primary" onclick="downloadPDF()">
             <span class="glyphicon glyphicon-download"></span>
             Descargar</button>
         </a>
         </center>
     </section>
 
-</div>
 
 <center>
 <div id="pdfCanvas" ></div>
