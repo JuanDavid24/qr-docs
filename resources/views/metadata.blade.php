@@ -1,13 +1,6 @@
 @extends('layout.master')
 @section('content')
 
-<div class="container-fluid d-flex flex-column">
-   <section class="col-md-8 col-md-offset-2" id="titulo">
-        
-        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
-        <p>Obtené información de un documento oficial por su número o código QR</p>
-    </section>
-
 
 @if(!$gedo['existe'])
     <section class="col-md-8 col-md-offset-2 text-center">
@@ -15,7 +8,7 @@
           <span style="font-size: 60px;" class="glyphicon glyphicon-remove text-danger"></span>
         </p>
         <h6>{{ $gedo['nroDocumento'] }}</h6>
-        <h6>Ningún documento oficial coincide con el número indicado</h6>
+        <h6>No se ha encontrado un documento oficial con el número ingresado</h6>
     </section>
 
 
@@ -86,11 +79,11 @@
 @endif
 
 
-          <form action="{{ route('verPdf') }}" method="POST">
+          
+@if( $gedo['qr'] && !$gedo['qrPublico'])
+<form action="{{ route('verPdf') }}" method="POST">
             @csrf
             <input type="hidden" name="nroDocumento" value="{{ $detalle['content']['numeroGde'] ?? '' }}">
-@if( $gedo['qr'] && !$gedo['qrPublico'])
-
     <div class="col-md-8 col-md-offset-2">
   <div class="form-group row">
       <p><strong >Este documento requiere un código verificador para ser visualizado</strong></p>
@@ -105,22 +98,34 @@
     </div>
   </div>
 </div>
+</form>
 @endif
       <section class="col-md-8 col-md-offset-2 text-center" id="botones">
+
+
+        <a href="#">
+        <button type="button" role="button" class="btn btn-sm btn-secondary" onclick="javascript:window.history.back();return false;">
+            <span class="glyphicon glyphicon-backward"></span>
+            Volver</button>
+          </a>
+
         <a href="/">
             <button type="button" role="link" class="btn btn-sm btn-secondary">
             <span class="glyphicon glyphicon-refresh"></span>
             Consultar otro</button>
         </a>
 @if( $gedo['qr'])
-
+<form action="{{ route('verPdf') }}" method="POST">
+            @csrf
+            <input type="hidden" name="nroDocumento" value="{{ $detalle['content']['numeroGde'] ?? '' }}">
             <button type="submit" role="button" class="btn btn-sm btn-primary" >
             <span class="glyphicon glyphicon-eye-open"></span>
             Visualizar documento</button>
+
+            </form>
 @endif             
     </section>
-         </form>
+         
 
-</div>
 
 @stop

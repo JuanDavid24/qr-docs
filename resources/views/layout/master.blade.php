@@ -16,6 +16,10 @@
         <link rel="shortcut icon" href="{{ asset('/images/favicon.ico') }}">
         <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
         <link href="{{ asset('css/back-to-top.css') }}" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </head>
 
 <body>
@@ -34,7 +38,7 @@
             <span class="icon-bar"></span>
           </button>
 					<div class="navbar-brand">
-						<img alt="Brand" src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/tramitesadistancia_logo.svg">
+						<img alt="Logotipo de Trámites a Distancia" src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/tramitesadistancia_logo.svg">
             <h1 class="sr-only">Trámites a Distancia <small>Presidencia de la Nación</small></h1>
           </div>
         </div>
@@ -47,10 +51,16 @@
     </div>
   </nav>
 </header>
+<div class="container-fluid d-flex flex-column">
+<section class="col-md-10 col-md-offset-2" id="titulo">
+        
+        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
+        <p>Obtené información de un documento oficial por su número o código QR</p>
+    </section>
 
     @yield('content')
     
-    
+</div>
 
     
 
@@ -59,8 +69,8 @@
   <div class="container  all-footer">
    <div class="row">
    <div class="col-xs-12 col-sm-4  institu">
-        <img class="image-responsive para-mobile" id= "footer-logo-mobi" alt="Trámites a Distancia - Presidencia de la Nación" src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/logo_argentina_unida.svg">
-        <img class="image-responsive para-desktop" id= "footer-logo-desk" alt="Trámites a Distancia - Presidencia de la Nación" src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/logo_argentina_unida.svg">
+        <img class="image-responsive para-mobile" id= "footer-logo-mobi" alt="Logotipo de Trámites a Distancia, Presidencia de la Nación" src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/logo_argentina_unida.svg">
+        <img class="image-responsive para-desktop" id= "footer-logo-desk" alt="Logotipo de Trámites a Distancia, Presidencia de la Nación" src="https://tramitesadistancia.gob.ar/tramitesadistancia/images/logo_argentina_unida.svg">
     </div>
 
     <div class=" col-sm-4 footer1">
@@ -80,9 +90,7 @@
   <a id="go-to-top" class= "top" href="#top-section"></a>
 
 </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
     @yield('js')
 </body>

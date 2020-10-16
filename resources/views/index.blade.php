@@ -1,40 +1,13 @@
 @extends('layout.master')
 @section('content')
 
-<style type="text/css">
-    .buscamos select.tt-select { padding: 19px; font-size: 20px; }
-
-</style>
-
-<div class="container-fluid d-flex flex-column">
-
-    <section class="col-md-8 col-md-offset-2" id="titulo">
-        
-        <h3 data-toggle="tooltip">Consultar documento oficial</h3>
-        <p>Obtené información de un documento oficial por su número o código QR</p>
-    </section>
-        
-<!-- -->
-
-<form id="frm_gedo" class="buscamos ng-pristine ng-valid ng-touched" action="{{ route('consulta') }}" method="POST">
 <section class="col-md-8 col-md-offset-2" id="buscador2" style="padding: 0px !IMPORTANT">
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link" id="pegar-tab" href="#" aria-selected="false"><span class="glyphicon glyphicon-paste"></span> Pegar</a>
-  </li>
-  <li class="nav-item" id="btn-scanner">
-    <a class="nav-link" id="bt_scanner" href="#" aria-selected="false"><span class="glyphicon glyphicon-qrcode"></span> Escanear QR</a>
-  
-  </li>
-  <li class="nav-item">
-    <a class="nav-link in active" id="completar-tab"  href="#"  aria-selected="true" ><span class="glyphicon glyphicon-trash"></span> Limpiar</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
+<form id="frm_gedo" class="buscamos ng-pristine ng-valid ng-touched" action="{{ route('consulta') }}" method="POST">
+
   <div class="tab-pane  show active" id="completar" role="tabpanel" aria-labelledby="completar-tab">
       <section class="col-md-12" id="buscador" style="padding: 0px !IMPORTANT">
             @csrf
-
+<h6>Ingrese el número de documento a consultar</h6>
             <div class="form-wrapper form-group input-group input-group-lg input-group-shadow" id="edit-basic">
               <div class="form-item form-item-keys form-type-textfield form-group">
                 <div class="input-group">
@@ -42,43 +15,38 @@
 
                 <!-- actuacion -->
                 <!-- <input type="text" class="input-md form-control tt-input" style="width: 15%" id="actuacion" name="actuacion" maxlength="2" placeholder="IF" spellcheck="false" value="" required="" /> -->
-                <select class="form-control  tt-select form-control-md" style="width: 20%" id="actuacion" name="actuacion" required="">
-                        <option value=""></option>
+                <select tabindex="1" class="form-control  tt-select form-control-md" style="width: 20%" id="actuacion" name="actuacion" required="">
+                        <option value="">Actuación</option>
                       @foreach (['AA','AB','AC','ACR','ACTA','ACTO','AD','ANLE','AP','AT','CA','CC','CD','CE','CF','CG','CM','CONV','COPD','CP','CR','CS','DCTO','DECA','DECR','DI','DIRE','DOCF','DOCP','EXDI','IF','IFMU','INLE','LAUD','MAPA','ME','NO','OD','OF','OFJU','OG'] as $actuacion)
                         <option value="{{ $actuacion }}" {{ ($docParam['actuacion'] == $actuacion ? 'SELECTED' : '')}}>{{ $actuacion }}</option>
                         @endforeach
 
                 </select>
 
-                <select class=" form-control  tt-select form-control-md" style="width: 25%" id="anio" name="anio" placeholder="2020" required="">
-                        <option value=""></option>
-                    @foreach (range(date("Y"),2011) as $anio)
+                <select tabindex="2" class=" form-control  tt-select form-control-md" style="width: 25%" id="anio" name="anio" placeholder="2020" required="">
+                        <option value="{{ date("Y") }}">{{ date("Y") }}</option>
+                    @foreach (range(date("Y")-1,2011) as $anio)
                         <option value="{{ $anio }}" {{ ($docParam['anio'] == $anio ? 'SELECTED' : '')}}>{{ $anio }}</option>
                     @endforeach
                 </select>
                 
-                <input type="number" class="input-md form-control tt-input" style="width: 20%" id="numero" name="numero" min="1" max="999999999" maxlength="9" step="1" placeholder="123456789" spellcheck="false"  value="{{ $docParam['numero'] ?? '' }}" required="" size="10" autocomplete="true" />
+                <input tabindex="3" type="number" class="input-md form-control tt-input" style="width: 20%" id="numero" name="numero" min="1" max="999999999" maxlength="9" step="1" placeholder="123456789" spellcheck="false"  value="{{ $docParam['numero'] ?? '' }}" required="" size="10" autocomplete="true" />
                 
-                <select class=" form-control  tt-select form-control-md" style="width: 15%" id="ecosistema" name="ecosistema" placeholder="APN" required="">
-                        <option value=""></option>
-                    @foreach( ['APN','INSSJP','ANSES'] as $ecosistema)
+                <select tabindex="4" class=" form-control  tt-select form-control-md" style="width: 15%" id="ecosistema" name="ecosistema" placeholder="APN" required="">
+                        <option value="APN">APN</option>
+                    @foreach( ['INSSJP','ANSES'] as $ecosistema)
                         <option value="{{ $ecosistema }}" {{ ($docParam['ecosistema']==$ecosistema) ? 'SELECTED' : '' }}>{{ $ecosistema }}</option>
                     @endforeach
                 </select>
 
-                <input type="text" class="input-md form-control tt-input" style="width: 20%; text-transform: uppercase;" id="reparticion" name="reparticion" placeholder="DN#JGM" spellcheck="false" value="{{ $docParam['reparticion'] ?? '' }}" required="" size="200" alt="repartición" />
+                <input tabindex="5" type="text" class="input-md form-control tt-input" style="width: 20%; text-transform: uppercase;" id="reparticion" name="reparticion" placeholder="DN#JGM" spellcheck="false" value="{{ $docParam['reparticion'] ?? '' }}" required="" size="200" alt="repartición" />
                 
             </div>
             
               </div>
-              <!-- <span class="input-group-btn">
-                <button class="btn btn-md" name="bt_scanner" id="bt_scanner" type="button">
-                    <span class="glyphicon glyphicon-qrcode"></span>
-                </button>
-              </span> -->
 
               <span class="input-group-btn">
-                <button class="btn-primary btn btn-md form-submit" id="edit-submit" name="buscar" type="submit">
+                <button tabindex="6" class="btn-primary btn btn-md form-submit" id="edit-submit" name="buscar" type="submit">
                     <span class="glyphicon glyphicon-search"></span></button>
               </span>
             </div>
@@ -87,10 +55,16 @@
 
         </section>
   </div>
-  
-</div>
+<div class="clearfix"></div>
+<section>
+    
+    <button tabindex="7" class="btn btn-md btn-primary" id="pegar-tab" type="button">
+        <span class="glyphicon glyphicon-paste"></span> Pegar</button>
+    <button tabindex="8" class="btn btn-md btn-primary" id="bt_scanner" type="button"><span class="glyphicon glyphicon-qrcode"></span> Escanear QR</button>
+    <button tabindex="9" class="btn btn-md btn-primary" id="completar-tab" type="button"><span class="glyphicon glyphicon-trash"></span> Limpiar</button>
 </section>
           </form>
+</section>
 
 
 <section class="col-md-8 col-md-offset-2" id="sFeedback" style="padding: 0px !IMPORTANT">
@@ -123,7 +97,7 @@
               <div id="explicacion_block">
                   <h6><strong>¿Dónde encuentro el Número del Documento?</strong></h6>
                   <p><span class="text-muted">Podrás encontrar el <strong>Número</strong> a la derecha del encabezado</span></p>
-                <img src="{{ asset('images/nro-ubicacion.jpg') }}">
+                <img src="{{ asset('images/nro-ubicacion.jpg') }}" alt="Ubicación del número de documento">
               </div>
 
               
@@ -133,16 +107,16 @@
 
             <div class="col-md-6">
               <div id="explicacion_block">
+                <p>&nbsp;</p>
                   <h6><strong>¿Dónde encuentro el código QR?</strong></h6>
                   <span class="text-muted">Podrás encontrar el <strong>código QR</strong> en la esquina inferior derecha del documento</span>
-                <img src="{{ asset('images/qr-ubicacion.jpg') }}">
+                <img src="{{ asset('images/qr-ubicacion.jpg') }}" alt="Ubicación del QR en el documento">
               </div>
 
               
             </div>
         
         </section>
-</div>
 
 @stop
 @section('js')
@@ -153,6 +127,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+
 
 $('#completar-tab').click(function() {
     setFeedback('&nbsp;');
@@ -227,7 +202,7 @@ $('#pegar-tab').click(function() {
         // reparticion
         setRep = $("#reparticion").val(partes[4]);
 
-        setFeedback('Número de Documento correcto');
+        setFeedback('&nbsp;');
 
         
         });
