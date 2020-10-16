@@ -74,15 +74,19 @@
     </div>
 
     <div class=" col-sm-4 footer1">
+      <ul>
     <li><a class="subfooter" href="https://tramitesadistancia.gob.ar/terminos-condiciones.html">Términos y condiciones</a></li>
       <li><a class="subfooter" href="https://tramitesadistancia.gob.ar/ayuda.html#6">Contacto</a></li>
       <li><a class="subfooter" href="https://tramitesadistancia.gob.ar/descarga.html">Descarga</a></li>
+    </ul>
     </div>
 
     <div class=" col-sm-4 footer2">
+      <ul>
       <li><a class="subfooter" href="https://tramitesadistancia.gob.ar/ayuda.html">Ayuda</a></li>
       <li><a class="subfooter" href="https://tramitesadistancia.gob.ar/ayuda.html#3">Manual de usuario</a></li>
       <li><a class="subfooter" href="https://tramitesadistancia.gob.ar/ayuda.html#5">Preguntas frecuentes</a></li>
+    </ul>
     </div>
     </div>
   </div>

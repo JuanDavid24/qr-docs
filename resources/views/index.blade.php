@@ -2,17 +2,17 @@
 @section('content')
 
 
-<section class="col-md-8 col-md-offset-2 text-center" id="buscador2" style="margin-top: 0px; padding-top: 0px">
+<section class="col-md-8 col-md-offset-2 text-center" id="titulo" style="margin-top: 0px; padding-top: 0px">
     <span class="text-muted">Ingrese el número de documento</span>
 </section>
-<section class="col-md-8 col-md-offset-2" id="buscador2" style="margin-top: 0px; padding-top: 0px">
+<section class="col-md-8 col-md-offset-2" id="buscador2" style="margin-top: 0px; padding-top: 0px;">
 
     <form id="frm_gedo" class="buscamos ng-pristine ng-valid ng-touched" action="{{ route('consulta') }}" method="POST">
         @csrf
 <div class="row form-wrapper form-group input-group input-group-lg input-group-shadow form-item form-item-keys form-type-textfield">    
             
             <div class="col-sm-3 m-0" style="margin:0px;padding:0px">
-                <label for="actuacion"><h6>Actuación</h6></label>
+                <label for="actuacion">Actuación</label>
                 <select tabindex="1" class="form-control  tt-select form-control-md"  id="actuacion" name="actuacion" required="">
                         <option value="">Actuación</option>
                       @foreach (['AA','AB','AC','ACR','ACTA','ACTO','AD','ANLE','AP','AT','CA','CC','CD','CE','CF','CG','CM','CONV','COPD','CP','CR','CS','DCTO','DECA','DECR','DI','DIRE','DOCF','DOCP','EXDI','IF','IFMU','INLE','LAUD','MAPA','ME','NO','OD','OF','OFJU','OG'] as $actuacion)
@@ -22,7 +22,7 @@
                 </select>
             </div>
             <div class="col-sm-2 m-0" style="margin:0px;padding:0px">
-                <label for="anio"><h6>Año</h6></label>
+                <label for="anio">Año</label>
                 <select tabindex="2" class=" form-control  tt-select form-control-md" id="anio"  name="anio" placeholder="2020" required="">
                         <option value="{{ date("Y") }}">{{ date("Y") }}</option>
                     @foreach (range(date("Y")-1,2011) as $anio)
@@ -31,12 +31,12 @@
                 </select>
             </div>
         <div class="col-sm-3" style="margin:0px;padding:0px">
-                <label for="numero"><h6>Número</h6></label>
+                <label for="numero">Número</label>
 
                 <input tabindex="3" type="number" class="input-md form-control tt-input" id="numero" name="numero" min="1" max="999999999" maxlength="9" step="1" placeholder="123456789" spellcheck="false"  value="{{ $docParam['numero'] ?? '' }}" required="" size="10" autocomplete="true" />
 </div>
             <div class="col-sm-2" style="margin:0px;padding:0px">
-            <label for="ecosistema"><h6>Ecosistema</h6></label>            
+            <label for="ecosistema">Ecosistema</label>            
                 <select tabindex="4" class=" form-control  tt-select form-control-md" id="ecosistema" name="ecosistema" placeholder="APN" required="">
                         <option value="APN">APN</option>
                     @foreach( ['INSSJP','ANSES'] as $ecosistema)
@@ -46,8 +46,8 @@
             </div>
             
             <div class="col-sm-2" style="margin:0px;padding:0px">
-                <label for="reparticion"><h6>Repartición</h6></label> 
-                <input tabindex="5" type="text" class="input-md form-control tt-input" style=" text-transform: uppercase;" id="reparticion" name="reparticion" placeholder="DN#JGM" spellcheck="false" value="{{ $docParam['reparticion'] ?? '' }}" required="" size="200" alt="repartición" />
+                <label for="reparticion">Repartición</label> 
+                <input tabindex="5" type="text" class="input-md form-control tt-input" style=" text-transform: uppercase;" id="reparticion" name="reparticion" placeholder="DN#JGM" spellcheck="false" value="{{ $docParam['reparticion'] ?? '' }}" required="" size="200" />
             </div>
 
            
