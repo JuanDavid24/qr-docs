@@ -80,7 +80,7 @@
     </div>
 
     <div class="col-md-6">
-      <div id="explicacion_block">
+      <div>
           <h6><strong>¿Dónde encuentro el Número del Documento?</strong></h6>
           <p><span class="text-muted">Podrás encontrar el <strong>Número</strong> a la derecha del encabezado</span></p>
         <img src="{{ asset('images/nro-ubicacion.jpg') }}" alt="Ubicación del número de documento">
@@ -92,7 +92,7 @@
 
 
     <div class="col-md-6">
-      <div id="explicacion_block">
+      <div>
         <p>&nbsp;</p>
           <h6><strong>¿Dónde encuentro el código QR?</strong></h6>
           <span class="text-muted">Podrás encontrar el <strong>código QR</strong> en la esquina inferior derecha del documento</span>
