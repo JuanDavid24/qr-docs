@@ -1,43 +1,162 @@
 @extends('layout.master')
 @section('content')
 
+<style>
+/* Style the Image Used to Trigger the Modal */
+#nro-ubicacion, #qr-ubicacion {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#qr-ubicacion:hover , #nro-ubicacion:hover {opacity: 0.6;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+    .form-buttons .btn{    
+        margin: 0px 15px;
+        padding: 16px 10px;
+        width: 150px;
+    }
+    @media only screen and (max-width: 700px){
+        .form-buttons .btn{    
+        margin: 10px 15px;
+        }
+    }
+    .form-buttons .btn-secondary{
+        background-color:rgb(88, 88, 88);
+        color: white;
+    }
+    .form-buttons .btn-secondary:hover{
+        background-color:rgb(113, 113, 113);
+        color: white;
+    }
+    .form-buttons .btn-secondary:active{
+        background-color:rgb(66, 66, 66);
+        color: white;
+    }
+    .form-group input, .form-group select{
+        border-style: solid;
+        border-width: 1.5px;
+        border-color: rgb(100, 100, 100);
+    }
+    label{
+        font-size: 15px;
+    }
+    .form-field{
+        border-style: solid;
+        border-width: 0px;
+        border-color: rgb(100, 100, 100);
+        margin: 0px 1px;
+        padding:0px
+    }
+
+</style>
+
 
 <section class="col-md-8 col-md-offset-2 text-center" style="margin-top: 0px; padding-top: 0px">
     <span class="text-muted">Ingrese el número de documento</span>
 </section>
+
 <section class="col-md-8 col-md-offset-2" id="buscador2" style="margin-top: 0px; padding-top: 0px;">
 
     <form id="frm_gedo" class="buscamos ng-pristine ng-valid ng-touched" action="{{ route('consulta') }}" method="POST">
         @csrf
-<div class="row form-wrapper form-group input-group input-group-lg input-group-shadow form-item form-item-keys form-type-textfield">    
-            
-            <div class="col-sm-3 m-0" style="margin:0px;padding:0px">
+        <div class=" row justify-content-center form-wrapper form-group input-group input-group-lg form-item form-item-keys form-type-textfield form-block">              
+            <div class="col-sm-2 m-0 form-field">
                 <label for="actuacion">Actuación</label>
-                <select tabindex="1" class="form-control  tt-select form-control-md"  id="actuacion" name="actuacion" required="">
+                <select tabindex="1" class="form-control  tt-select form-control-md  input-group-shadow"  id="actuacion" name="actuacion" required="">
                         <option value="">Actuación</option>
-                      @foreach (['AA','AB','AC','ACR','ACTA','ACTO','AD','ANLE','AP','AT','CA','CC','CD','CE','CF','CG','CM','CONV','COPD','CP','CR','CS','DCTO','DECA','DECR','DI','DIRE','DOCF','DOCP','EXDI','IF','IFMU','INLE','LAUD','MAPA','ME','NO','OD','OF','OFJU','OG'] as $actuacion)
+                    @foreach (['AA','AB','AC','ACR','ACTA','ACTO','AD','ANLE','AP','AT','CA','CC','CD','CE','CF','CG','CM','CONV','COPD','CP','CR','CS','DCTO','DECA','DECR','DI','DIRE','DOCF','DOCP','EXDI','IF','IFMU','INLE','LAUD','MAPA','ME','NO','OD','OF','OFJU','OG'] as $actuacion)
                         <option value="{{ $actuacion }}" {{ ($docParam['actuacion'] == $actuacion ? 'SELECTED' : '')}}>{{ $actuacion }}</option>
-                        @endforeach
-
+                    @endforeach
                 </select>
             </div>
-            <div class="col-sm-2 m-0" style="margin:0px;padding:0px">
+            <div class="col-sm-2 m-2 form-field">
                 <label for="anio">Año</label>
-                <select tabindex="2" class=" form-control  tt-select form-control-md" id="anio"  name="anio" placeholder="2020" required="">
+                <select tabindex="2" class="form-control  tt-select form-control-md input-group-shadow" id="anio"  name="anio" placeholder="2020" required="">
                         <option value="{{ date("Y") }}">{{ date("Y") }}</option>
                     @foreach (range(date("Y")-1,2011) as $anio)
                         <option value="{{ $anio }}" {{ ($docParam['anio'] == $anio ? 'SELECTED' : '')}}>{{ $anio }}</option>
                     @endforeach
                 </select>
             </div>
-        <div class="col-sm-3" style="margin:0px;padding:0px">
+            <div class="col-sm-3 form-field">
                 <label for="numero">Número</label>
-
-                <input tabindex="3" type="number" class="input-md form-control tt-input" id="numero" name="numero" min="1" max="999999999" maxlength="9" step="1" placeholder="123456789" spellcheck="false"  value="{{ $docParam['numero'] ?? '' }}" required="" size="10" autocomplete="true" />
-</div>
-            <div class="col-sm-2" style="margin:0px;padding:0px">
-            <label for="ecosistema">Ecosistema</label>            
-                <select tabindex="4" class=" form-control  tt-select form-control-md" id="ecosistema" name="ecosistema" placeholder="APN" required="">
+                <input tabindex="3" type="number" class="input-md form-control tt-input input-group-shadow" id="numero" name="numero" min="1" max="999999999" maxlength="9" step="1" placeholder="123456789" spellcheck="false"  value="{{ $docParam['numero'] ?? '' }}" required="" size="10" autocomplete="true" />
+            </div>
+            <div class="col-sm-2 form-field">
+                <label for="ecosistema">Ecosistema</label>            
+                <select tabindex="4" class=" form-control  tt-select form-control-md input-group-shadow form-field" id="ecosistema" name="ecosistema" placeholder="APN" required="">
                         <option value="APN">APN</option>
                     @foreach( ['INSSJP','ANSES'] as $ecosistema)
                         <option value="{{ $ecosistema }}" {{ ($docParam['ecosistema']==$ecosistema) ? 'SELECTED' : '' }}>{{ $ecosistema }}</option>
@@ -45,22 +164,20 @@
                 </select>
             </div>
             
-            <div class="col-sm-2" style="margin:0px;padding:0px">
+            <div class="col-sm-2 form-field">
                 <label for="reparticion">Repartición</label> 
-                <input tabindex="5" type="text" class="input-md form-control tt-input" style=" text-transform: uppercase;" id="reparticion" name="reparticion" placeholder="DN#JGM" spellcheck="false" value="{{ $docParam['reparticion'] ?? '' }}" required="" size="200" />
+                <input tabindex="5" type="text" class="input-md form-control tt-input input-group-shadow" style=" text-transform: uppercase;" id="reparticion" name="reparticion" placeholder="DN#JGM" spellcheck="false" value="{{ $docParam['reparticion'] ?? '' }}" required="" size="200" />
             </div>
-
-           
-
-</div>
+            
+        </div>
 
 <div class="clearfix">&nbsp;</div>
-        <div class="text-center">
+        <div class="d-flex text-center flex-row justify-content-center form-buttons">
             <p><span class="text-small" id="feedback">&nbsp;</span></p>
-            <button tabindex="7" class="btn btn-md btn-secondary" id="pegar-tab" type="button"><span class="glyphicon glyphicon-paste"></span> Pegar</button>
-            <button tabindex="8" class="btn btn-md btn-secondary" id="bt_scanner" type="button"><span class="glyphicon glyphicon-qrcode"></span> Escanear QR</button>
-            <button tabindex="9" class="btn btn-md btn-secondary" id="completar-tab" type="button"><span class="glyphicon glyphicon-trash"></span> Limpiar</button>
-            <button tabindex="6" class="btn btn-primary btn-md form-submit" id="edit-submit" name="buscar" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+            <button tabindex="7" class="btn btn-md btn-secondary " id="pegar-tab" type="button"><span class="glyphicon glyphicon-paste"></span> Pegar</button>
+            <button tabindex="8" class="btn btn-md btn-secondary mr-2" id="bt_scanner" type="button"><span class="glyphicon glyphicon-qrcode"></span> Escanear QR</button>
+            <button tabindex="9" class="btn btn-md btn-secondary mr-1" id="completar-tab" type="button"><span class="glyphicon glyphicon-trash"></span> Limpiar</button>
+            <button tabindex="6" class="btn btn-primary btn-md form-submit  ml-1" id="edit-submit" name="buscar" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
         </div>
         
         </form>
@@ -80,27 +197,48 @@
     </div>
 
     <div class="col-md-6">
-      <div>
-          <h6><strong>¿Dónde encuentro el Número del Documento?</strong></h6>
-          <p><span class="text-muted">Podrás encontrar el <strong>Número</strong> a la derecha del encabezado</span></p>
-        <img src="{{ asset('images/nro-ubicacion.jpg') }}" alt="Ubicación del número de documento">
-      </div>
+        <div>
+            <h6><strong>¿Dónde encuentro el Número del Documento?</strong></h6>
+            <p><span class="text-muted">Podrás encontrar el <strong>Número</strong> a la derecha del encabezado</span></p>
+            <img id="nro-ubicacion" src="{{ asset('images/nro-ubicacion.jpg') }}" alt="Ubicación del número de documento">
+        </div>
 
-      
+        <!-- The Modal -->
+        <div id="modal-img01" class="modal">
 
+            <!-- The Close Button -->
+            <span class="close">&times;</span>
+        
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="img01" src="{{ asset('images/nro-ubicacion.jpg') }}">
+        
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
+        </div>
     </div>
-
 
     <div class="col-md-6">
       <div>
         <p>&nbsp;</p>
           <h6><strong>¿Dónde encuentro el código QR?</strong></h6>
           <span class="text-muted">Podrás encontrar el <strong>código QR</strong> en la esquina inferior derecha del documento</span>
-        <img src="{{ asset('images/qr-ubicacion.jpg') }}" alt="Ubicación del QR en el documento">
-      </div>
+        <img id= "qr-ubicacion" src="{{ asset('images/qr-ubicacion.jpg') }}" alt="Ubicación del QR en el documento">
 
-      
+        <!-- The Modal -->
+        <div id="modal-img02" class="modal">
+
+            <!-- The Close Button -->
+            <span class="close">&times;</span>
+        
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="img02" src="{{ asset('images/qr-ubicacion.jpg') }}">
+        
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
+        </div>
+      </div>
     </div>
+
 
 </section>
 
@@ -109,7 +247,50 @@
     <script src="{{ asset('js/jsqrcode-combined.js') }}"></script>
     <script src="{{ asset('js/html5-qrcode.js') }}"></script>
 
-
+    <script>
+        // Get the modal
+        var modal = document.getElementById("modal-img01");
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("nro-ubicacion");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = src="images/nro-ubicacion-full.jpg";
+          captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+          modal.style.display = "none";
+        }
+    </script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("modal-img02");
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("qr-ubicacion");
+        var modalImg = document.getElementById("img02");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = src="images/qr-ubicacion-full.jpg";
+          captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[1];
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+          modal.style.display = "none";
+        }
+        </script>
 <script type="text/javascript">
 
     $(document).ready(function() {
